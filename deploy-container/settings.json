@@ -1,7 +1,15 @@
 {
-  "workbench.colorTheme": "Default Dark+",
+  "workbench.colorTheme": "Solarized Light",
   "git.postCommitCommand": "sync",
   "git.enableSmartCommit": true,
   "git.confirmSync": false,
-  "git.autofetch": true
+  "git.autofetch": true,
+  "workbench.preferredDarkColorTheme": "Solarized Light",
+  "workbench.preferredLightColorTheme": "Solarized Dark",
+  "window.autoDetectColorScheme": true,
+  "python.disableInstallationCheck": true,
+  "code-runner.respectShebang": false,
+  "code-runner.executorMap": {
+    "python": "python3 -u"
+  }
 }
