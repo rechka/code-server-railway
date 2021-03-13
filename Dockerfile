@@ -15,8 +15,11 @@ RUN curl https://rclone.org/install.sh | sudo bash
 
 # You can add custom software and dependencies for your environment here. Some examples:
 
-RUN code-server --install-extension ms-python.python donjayamanne.githistory formulahendry.code-runner
-RUN sudo apt-get install -y python3-venv python3-pip
+RUN code-server --install-extension ms-python.python --force && \
+    code-server --install-extension donjayamanne.githistory --force && \
+    code-server --install-extension formulahendry.code-runner --force 
+RUN sudo apt-get install -y python3-venv python3-pip jq \
+    && sudo rm -rf /var/lib/apt/lists/*
 # RUN COPY myTool /home/coder/myTool
 
 # Fix permissions for code-server
