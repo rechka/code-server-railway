@@ -15,8 +15,8 @@ RUN curl https://rclone.org/install.sh | sudo bash
 
 # You can add custom software and dependencies for your environment here. Some examples:
 
-# RUN code-server --install-extension esbenp.prettier-vscode
-# RUN sudo apt-get install -y build-essential
+RUN code-server --install-extension ms-python.python donjayamanne.githistory formulahendry.code-runner
+RUN sudo apt-get install -y python3-venv python3-pip
 # RUN COPY myTool /home/coder/myTool
 
 # Fix permissions for code-server
