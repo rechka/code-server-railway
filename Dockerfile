@@ -1,7 +1,7 @@
 # Start from the code-server Debian base image
 FROM codercom/code-server:latest 
 
-RUN sudo timedatectl set-timezone America/Toronto
+RUN sudo echo America/Toronto > /etc/timezone && export TZ=America/Toronto
 
 USER coder
 
