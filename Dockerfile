@@ -11,9 +11,10 @@ COPY deploy-container/settings.json .local/share/code-server/User/settings.json
 # Use bash shell
 ENV SHELL=/bin/bash
 
-# Install unzip + rclone (support for remote filesystem)
+# Install unzip + rclone (support for remote filesystem) + kite
 RUN sudo apt-get update && sudo apt-get install unzip -y
 RUN curl https://rclone.org/install.sh | sudo bash
+RUN sudo bash -c "$(wget -q -O - https://linux.kite.com/dls/linux/current)"
 
 # Fix permissions for code-server
 RUN sudo chown -R coder:coder /home/coder/.local
@@ -22,7 +23,10 @@ RUN sudo chown -R coder:coder /home/coder/.local
 
 RUN code-server --install-extension ms-python.python --force && \
     code-server --install-extension donjayamanne.githistory --force && \
-    code-server --install-extension formulahendry.code-runner --force 
+    code-server --install-extension formulahendry.code-runner --force && \
+    code-server --install-extension almenon.arepl --force && \
+    code-server --install-extension kiteco.kite --force && \
+    code-server --install-extension ms-azuretools.vscode-docker --force
 RUN sudo apt-get install -y --no-install-recommends python3-venv fluxbox tightvncserver xdg-utils python3-pip \
     nodejs gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 fonts-powerline jq python3-dev \
     libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 wget \
