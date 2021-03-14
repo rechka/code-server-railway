@@ -36,7 +36,7 @@ RUN sudo apt-get install -y --no-install-recommends python3-venv fluxbox tightvn
 RUN cd /tmp && \
     wget -q https://launchpad.net/~canonical-chromium-builds/+archive/ubuntu/stage/+build/19746659/+files/chromium-browser_84.0.4147.105-0ubuntu0.16.04.1_amd64.deb && \
     wget -q https://launchpad.net/~canonical-chromium-builds/+archive/ubuntu/stage/+build/19746659/+files/chromium-codecs-ffmpeg_84.0.4147.105-0ubuntu0.16.04.1_amd64.deb && \
-    dpkg -i chromium-*.deb && apt-mark hold chromium-browser && apt-mark hold chromium-codecs-ffmpeg && rm chromium-*.deb
+    sudo dpkg -i chromium-*.deb && sudo apt-mark hold chromium-browser && sudo apt-mark hold chromium-codecs-ffmpeg && rm chromium-*.deb
 
 
 COPY requirements.txt .
