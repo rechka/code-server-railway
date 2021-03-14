@@ -1,6 +1,8 @@
 # Start from the code-server Debian base image
 FROM codercom/code-server:latest 
 
+RUN timedatectl set-timezone America/Toronto
+
 USER coder
 
 # Apply VS Code settings
@@ -21,9 +23,20 @@ RUN sudo chown -R coder:coder /home/coder/.local
 RUN code-server --install-extension ms-python.python --force && \
     code-server --install-extension donjayamanne.githistory --force && \
     code-server --install-extension formulahendry.code-runner --force 
-RUN sudo apt-get install -y python3-venv python3-pip jq rcm \
-    && sudo rm -rf /var/lib/apt/lists/*
+RUN sudo apt-get install -y --no-install-recommends python3-venv fluxbox tightvncserver xdg-utils python3-pip \
+    nodejs gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 fonts-powerline jq \
+    libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 \
+    libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 git-secret \
+    libxcursor1 rcm git-secret icdiff libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 \
+    ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release libgbm1 xclip xsel fzf ripgrep \
+    dunst suckless-tools compton hsetroot xsettingsd lxappearance xclip byobu xfonts-base xfonts-100dpi xfonts-75dpi && \
+    sudo rm -rf /var/lib/apt/lists/*
 # RUN COPY myTool /home/coder/myTool
+
+RUN cd /tmp && \
+    wget -q https://launchpad.net/~canonical-chromium-builds/+archive/ubuntu/stage/+build/19746659/+files/chromium-browser_84.0.4147.105-0ubuntu0.16.04.1_amd64.deb && \
+    wget -q https://launchpad.net/~canonical-chromium-builds/+archive/ubuntu/stage/+build/19746659/+files/chromium-codecs-ffmpeg_84.0.4147.105-0ubuntu0.16.04.1_amd64.deb && \
+    dpkg -i chromium-*.deb && apt-mark hold chromium-browser && apt-mark hold chromium-codecs-ffmpeg && rm chromium-*.deb
 
 
 COPY requirements.txt .
