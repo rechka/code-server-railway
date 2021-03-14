@@ -21,12 +21,15 @@ RUN sudo chown -R coder:coder /home/coder/.local
 RUN code-server --install-extension ms-python.python --force && \
     code-server --install-extension donjayamanne.githistory --force && \
     code-server --install-extension formulahendry.code-runner --force 
-RUN sudo apt-get install -y python3-venv python3-pip jq \
+RUN sudo apt-get install -y python3-venv python3-pip jq rcm \
     && sudo rm -rf /var/lib/apt/lists/*
 # RUN COPY myTool /home/coder/myTool
 
 
+COPY requirements.txt .
 
+RUN pip3 install --no-cache-dir -r requirements.txt
+RUN git clone https://github.com/rechka/.dotfiles /home/coder/.dotfiles
 
 # Port
 ENV PORT=8080
