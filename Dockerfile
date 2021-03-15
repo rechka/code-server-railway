@@ -37,6 +37,8 @@ RUN sudo apt-get install -y --no-install-recommends python3-venv fluxbox tightvn
     sudo rm -rf /var/lib/apt/lists/*
 # RUN COPY myTool /home/coder/myTool
 
+RUN bash -c "$(wget -q -O - https://linux.kite.com/dls/linux/current)"
+
 RUN cd /tmp && \
     wget -q https://launchpad.net/~canonical-chromium-builds/+archive/ubuntu/stage/+build/19746659/+files/chromium-browser_84.0.4147.105-0ubuntu0.16.04.1_amd64.deb && \
     wget -q https://launchpad.net/~canonical-chromium-builds/+archive/ubuntu/stage/+build/19746659/+files/chromium-codecs-ffmpeg_84.0.4147.105-0ubuntu0.16.04.1_amd64.deb && \
