@@ -1,6 +1,6 @@
 #!/bin/bash
 
-START_DIR=/home/coder/project
+START_DIR=/home/coder
 
 # add rclone config and start rclone, if supplied
 if [[ -z "${RCLONE_DATA}" ]]; then
